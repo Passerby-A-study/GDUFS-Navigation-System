@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="campus_map.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="path_finding.cpp" />
     <ClCompile Include="user_interface.cpp" />
   </ItemGroup>
   <ItemGroup>

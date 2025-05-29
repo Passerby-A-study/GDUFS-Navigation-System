@@ -24,11 +24,11 @@
     <ClCompile Include="campus_map.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="path_finding.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="campus_map.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="location.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -36,6 +36,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="user_interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="campus_map.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

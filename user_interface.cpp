@@ -79,7 +79,8 @@ void UI_functionmenu()
 			{
 			case 1:
 			{
-			
+				//cls();
+				UI_findmenu();
 				break;
 			}
 			case 2:
@@ -97,4 +98,51 @@ void UI_functionmenu()
 	}
 }
 
+void UI_findmenu()
+{
+	printmap();
 
+	cout << "欢迎来到广外校园导航系统" << endl;
+	cout << "1，输出邻接矩阵" << endl;
+	cout << "2，输出邻接表" << endl;
+	cout << "3，环游校园" << endl;
+	cout << "4，查询最短路径" << endl;
+	while (cin)
+	{
+		cout << "请输入选择（数字 1-4 ）：";
+		int choice;
+		cin >> choice;
+		cout << endl;
+		if (!cin)
+		{
+			cout << "无效输入，请重新输入！" << endl;
+			cin.ignore();
+			continue;
+		}
+		else
+		{
+			switch (choice)
+			{
+			case 1:
+				print_adjm();
+				break;
+			case 2:
+				print_adjl();
+				break;
+			case 3:
+				break;
+			case 4:
+				return;
+
+			default:
+				cout << "无效输入，请重新输入！" << endl;
+				continue;
+			}
+		}
+	}
+}
+
+void UI_shortestpath()
+{
+	string start;
+}
