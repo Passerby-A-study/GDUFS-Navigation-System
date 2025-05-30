@@ -41,5 +41,11 @@
     <ClInclude Include="campus_map.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="mystack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="style.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
