@@ -94,13 +94,15 @@ void printchoices(int cur) {
         i++;
         e = e->next;
     }
+    std::cout << std::endl;
 }
 
 bool go() {
     std::string next;
     int next_index;
     while (true) {
-        std::cout << "请输入下一个地点的名称（名称中间不要有空格,输入“退出”将退出导航）：" << std::endl;
+        std::cout << std::endl;
+        std::cout << "请输入下一个地点的名称（名称中间不要有空格,输入“退出”将退出导航）：" ;
         getline(std::cin, next);
         if (next == "退出") return false;
         next_index = find_index(next);

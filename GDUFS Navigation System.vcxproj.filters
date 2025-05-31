@@ -30,6 +30,9 @@
     <ClCompile Include="navigation.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="style.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="navigation.h">

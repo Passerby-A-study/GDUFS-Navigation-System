@@ -131,6 +131,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="navigation.cpp" />
     <ClCompile Include="path_finding.cpp" />
+    <ClCompile Include="style.cpp" />
     <ClCompile Include="user_interface.cpp" />
   </ItemGroup>
   <ItemGroup>
