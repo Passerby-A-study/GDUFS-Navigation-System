@@ -1,6 +1,7 @@
 #include "user_interface.h"
 #include "campus_map.h"
 #include "path_finding.h"
+#include "navigation.h"
 #include "style.h"
 #include <iostream>
 #include <cstdlib>
@@ -27,7 +28,7 @@ int get_menu_choice(int min, int max) {
         }
         else {
             set_text_color(FOREGROUND_GREEN);
-            cout << "无效输入，请重新输入！" << endl;
+            cout << "无效输入！" << endl;
             reset_text_color();
             cin.clear();
             cin.ignore();
@@ -80,7 +81,7 @@ void UI_functionmenu()
         printmap();
         cout << "请选择功能服务" << endl;
         cout << "1，地图查询" << endl;
-        cout << "2，导航" << endl;
+        cout << "2，校园导航" << endl;
         cout << "3，退出" << endl;
 
         int choice = get_menu_choice(1, 3);
@@ -90,7 +91,8 @@ void UI_functionmenu()
             UI_findmenu();
             break;
         case 2:
-            cout << "导航功能暂未实现！" << endl;
+            system("cls");
+            UI_navichoose();
             break;
         case 3:
             system("cls");
@@ -137,7 +139,7 @@ void UI_findmenu()
             getline(cin, start);
             int start_index = find_index(start);
             if (start_index == 0) {
-                cout << "无效的起点，请重新输入！" << endl;           
+                cout << "无效的起点！" << endl;           
                 sleep();
                 system("cls");
                 break;
@@ -154,7 +156,7 @@ void UI_findmenu()
             getline(cin, start);
             int start_index = find_index(start);
             if (start_index == 0) {
-                cout << "无效的起点，请重新输入！" << endl;
+                cout << "无效的起点！" << endl;
                 sleep();
                 system("cls");
                 break;
@@ -163,7 +165,7 @@ void UI_findmenu()
             getline(cin, end);
             int end_index = find_index(end);
             if (end_index == 0) {
-                cout << "无效的终点，请重新输入！" << endl;
+                cout << "无效的终点！" << endl;
                 sleep();
                 system("cls");
                 break;
@@ -180,7 +182,7 @@ void UI_findmenu()
             getline(cin, start);
             int start_index = find_index(start);
             if (start_index == 0) {
-                cout << "无效的起点，请重新输入！" << endl;
+                cout << "无效的起点！" << endl;
                 sleep();
                 system("cls");
                 break;
@@ -225,4 +227,77 @@ void sleep()
     cout << "请按 ENTER 键继续" << endl;
     reset_text_color();
     getchar();
+}
+
+void UI_navichoose()
+{
+    while (true) {
+        cout << "请选择功能服务" << endl;
+        cout << "1，开始导航" << endl;
+        cout << "2，排行榜" << endl;
+        cout << "3，退出" << endl;
+
+        int choice = get_menu_choice(1, 3);
+        switch (choice) {
+        case 1:
+            system("cls");
+            UI_navigation();
+            system("cls");
+            break;
+        case 2:
+            system("cls");
+            creatrank(steps);
+            printrank();
+            sleep();
+            system("cls");
+            break;
+        case 3:
+            system("cls");
+            return;
+        }
+    }
+}
+
+void UI_navigation()
+{
+    string start, end;
+    int start_index, end_index;
+    while (true)
+    {
+        system("cls");
+        printmap();
+        cout << "请输入起点（名称中不要有空格）：";
+        getline(cin, start);
+        start_index = find_index(start);
+        if (start_index == 0) {
+            cout << "无效的起点！" << endl;
+            sleep();
+            system("cls");
+            return;
+        }
+        cout << "请输入终点（名称中不要有空格）：";
+        getline(cin, end);
+        end_index = find_index(end);
+        if (end_index == 0) {
+            cout << "无效的终点！" << endl;
+            sleep();
+            system("cls");
+            return;
+        }
+        break;
+    }
+    cur = start_index;
+    while (true)
+    {
+        system("cls");
+        printmap();
+        print_recommend(start_index, end_index);
+        print_intro(cur);
+        print_total_step();
+        printchoices(cur);
+        if (!go())
+        {
+            return;
+        }
+    }
 }

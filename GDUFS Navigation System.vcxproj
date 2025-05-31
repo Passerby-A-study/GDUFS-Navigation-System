@@ -129,12 +129,13 @@
   <ItemGroup>
     <ClCompile Include="campus_map.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="navigation.cpp" />
     <ClCompile Include="path_finding.cpp" />
     <ClCompile Include="user_interface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="campus_map.h" />
-    <ClInclude Include="location.h" />
+    <ClInclude Include="navigation.h" />
     <ClInclude Include="path_finding.h" />
     <ClInclude Include="mystack.h" />
     <ClInclude Include="style.h" />

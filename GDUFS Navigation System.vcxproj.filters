@@ -27,9 +27,12 @@
     <ClCompile Include="path_finding.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="navigation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="location.h">
+    <ClInclude Include="navigation.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="path_finding.h">
