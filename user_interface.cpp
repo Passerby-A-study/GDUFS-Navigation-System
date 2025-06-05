@@ -1,3 +1,9 @@
+/**
+ * @file user_interface.cpp
+ * @brief 用户界面实现的源文件。
+ * 包含界面交互、菜单显示和导航界面的具体实现。
+ */
+
 #include "user_interface.h"
 #include "campus_map.h"
 #include "path_finding.h"
@@ -14,11 +20,11 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-// 辅助函数：读取并验证菜单选项
-int get_menu_choice(int min, int max) {
+int get_menu_choice(int min, int max)
+{
     int choice;
     while (true) {
-        set_text_color(FOREGROUND_YELLOW); // 黄色提示
+        set_text_color(FOREGROUND_YELLOW);
         cout << "请输入选择（ 数字 " << min << "-" << max << " ）：";
         reset_text_color();
         if (cin >> choice && choice >= min && choice <= max) {
@@ -27,7 +33,7 @@ int get_menu_choice(int min, int max) {
             return choice;
         }
         else {
-            set_text_color(FOREGROUND_YELLOW); // 黄色错误提示
+            set_text_color(FOREGROUND_YELLOW);
             cout << "无效输入！" << endl;
             reset_text_color();
             cin.clear();
@@ -36,9 +42,10 @@ int get_menu_choice(int min, int max) {
     }
 }
 
-void UI_Start() {
+void UI_Start()
+{
     while (true) {
-        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮天蓝色
+        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
         cout << "欢迎来到广外校园导航系统" << endl;
         cout << "1，开始" << endl;
         cout << "2，项目介绍" << endl;
@@ -49,7 +56,7 @@ void UI_Start() {
         switch (choice) {
         case 1:
             system("cls");
-            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮绿色提示
+            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
             cout << "地图开始加载" << endl;
             loading_screen();
             creatgraph();
@@ -60,7 +67,7 @@ void UI_Start() {
             UI_functionmenu();
             break;
         case 2:
-            set_text_color(FOREGROUND_LIGHT_SKY); // 亮天蓝色
+            set_text_color(FOREGROUND_LIGHT_SKY);
             cout << "广外校园导航系统 - 项目介绍" << endl;
             cout << "----------------------------------------" << endl;
             cout << "本系统专为广东外语外贸大学（广外）师生设计，" << endl;
@@ -90,20 +97,20 @@ void UI_Start() {
             system("cls");
             break;
         case 3:
-            set_text_color(FOREGROUND_LIGHT_SKY); // 亮天蓝色
+            set_text_color(FOREGROUND_LIGHT_SKY);
             cout << "----------------------------------------" << endl;
             cout << "开发人员：" << endl
-                <<"负责人：林子豪"<<endl
-                <<"统筹协调项目推进"<<endl<<endl
-                <<"组员：张涛，曾琪"<<endl
-                <<"算法实现，功能设计"<<endl;
+                << "负责人：林子豪" << endl
+                << "统筹协调项目推进" << endl << endl
+                << "组员：张涛，曾琪" << endl
+                << "算法实现，功能设计" << endl;
             cout << "----------------------------------------" << endl;
             reset_text_color();
             sleep();
             system("cls");
             break;
         case 4:
-            set_text_color(FOREGROUND_LIGHT_SKY); // 亮天蓝色
+            set_text_color(FOREGROUND_LIGHT_SKY);
             cout << "感谢使用，再见！" << endl;
             reset_text_color();
             return;
@@ -111,10 +118,11 @@ void UI_Start() {
     }
 }
 
-void UI_functionmenu() {
+void UI_functionmenu()
+{
     while (true) {
         printmap();
-        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮紫色
+        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
         cout << "请选择功能服务" << endl;
         cout << "1，地图查询" << endl;
         cout << "2，校园导航" << endl;
@@ -137,10 +145,11 @@ void UI_functionmenu() {
     }
 }
 
-void UI_findmenu() {
+void UI_findmenu()
+{
     while (true) {
         printmap();
-        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮绿色
+        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
         cout << "欢迎来到广外校园导航系统" << endl;
         cout << "1，输出邻接矩阵" << endl;
         cout << "2，输出邻接表" << endl;
@@ -156,7 +165,7 @@ void UI_findmenu() {
         }
         switch (choice) {
         case 1:
-            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮绿色
+            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
             print_adjm();
             cout << endl;
             reset_text_color();
@@ -164,7 +173,7 @@ void UI_findmenu() {
             system("cls");
             break;
         case 2:
-            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮绿色
+            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
             print_adjl();
             cout << endl;
             reset_text_color();
@@ -174,13 +183,13 @@ void UI_findmenu() {
         case 3:
         {
             string start;
-            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮绿色
+            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
             cout << "请输入起点（名称中不要有空格）：";
             reset_text_color();
             getline(cin, start);
             int start_index = find_index(start);
             if (start_index == 0) {
-                set_text_color(FOREGROUND_LIGHT_RED); // 亮红色错误
+                set_text_color(FOREGROUND_LIGHT_RED);
                 cout << "无效的起点！" << endl;
                 reset_text_color();
                 sleep();
@@ -195,26 +204,26 @@ void UI_findmenu() {
         case 4:
         {
             string start, end;
-            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮绿色
+            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
             cout << "请输入起点（名称中不要有空格）：";
             reset_text_color();
             getline(cin, start);
             int start_index = find_index(start);
             if (start_index == 0) {
-                set_text_color(FOREGROUND_LIGHT_RED); // 亮红色错误
+                set_text_color(FOREGROUND_LIGHT_RED);
                 cout << "无效的起点！" << endl;
                 reset_text_color();
                 sleep();
                 system("cls");
                 break;
             }
-            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮绿色
+            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
             cout << "请输入终点（名称中不要有空格）：";
             reset_text_color();
             getline(cin, end);
             int end_index = find_index(end);
             if (end_index == 0) {
-                set_text_color(FOREGROUND_LIGHT_RED); // 亮红色错误
+                set_text_color(FOREGROUND_LIGHT_RED);
                 cout << "无效的终点！" << endl;
                 reset_text_color();
                 sleep();
@@ -229,13 +238,13 @@ void UI_findmenu() {
         case 5:
         {
             string start;
-            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮绿色
+            set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
             cout << "请输入起点：";
             reset_text_color();
             getline(cin, start);
             int start_index = find_index(start);
             if (start_index == 0) {
-                set_text_color(FOREGROUND_LIGHT_RED); // 亮红色错误
+                set_text_color(FOREGROUND_LIGHT_RED);
                 cout << "无效的起点！" << endl;
                 reset_text_color();
                 sleep();
@@ -251,8 +260,9 @@ void UI_findmenu() {
     }
 }
 
-void loading_screen() {
-    set_text_color(FOREGROUND_CYAN); // 青色
+void loading_screen()
+{
+    set_text_color(FOREGROUND_CYAN);
     srand(static_cast<unsigned int>(time(0)));
     int delay_seconds = rand() % 5 + 1;
     std::cout << "加载中，请稍后..." << std::endl;
@@ -267,16 +277,18 @@ void loading_screen() {
     reset_text_color();
 }
 
-void sleep() {
-    set_text_color(FOREGROUND_LIGHT_RED); // 亮红色
+void sleep()
+{
+    set_text_color(FOREGROUND_LIGHT_RED);
     cout << "请按 ENTER 键继续" << endl;
     reset_text_color();
     getchar();
 }
 
-void UI_navichoose() {
+void UI_navichoose()
+{
     while (true) {
-        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 亮橙色
+        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
         cout << "请选择功能服务" << endl;
         cout << "1，开始导航" << endl;
         cout << "2，排行榜" << endl;
@@ -303,34 +315,35 @@ void UI_navichoose() {
     }
 }
 
-void UI_navigation() {
+void UI_navigation()
+{
     string start, end;
     int start_index, end_index;
     while (true) {
         system("cls");
-        set_text_color(FOREGROUND_WHITE); // 白色，深蓝色背景
+        set_text_color(FOREGROUND_WHITE);
         printmap();
         reset_text_color();
-        set_text_color(FOREGROUND_WHITE); // 白色，深蓝色背景
+        set_text_color(FOREGROUND_WHITE);
         cout << "请输入起点（名称中不要有空格）：";
         reset_text_color();
         getline(cin, start);
         start_index = find_index(start);
         if (start_index == 0) {
-            set_text_color(FOREGROUND_LIGHT_RED); // 亮红色错误
+            set_text_color(FOREGROUND_LIGHT_RED);
             cout << "无效的起点！" << endl;
             reset_text_color();
             sleep();
             system("cls");
             return;
         }
-        set_text_color(FOREGROUND_WHITE); // 白色，深蓝色背景
+        set_text_color(FOREGROUND_WHITE);
         cout << "请输入终点（名称中不要有空格）：";
         reset_text_color();
         getline(cin, end);
         end_index = find_index(end);
         if (end_index == 0) {
-            set_text_color(FOREGROUND_LIGHT_RED); // 亮红色错误
+            set_text_color(FOREGROUND_LIGHT_RED);
             cout << "无效的终点！" << endl;
             reset_text_color();
             sleep();
@@ -339,21 +352,29 @@ void UI_navigation() {
         }
         break;
     }
+    if (start_index == end_index)
+    {
+        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        cout << "您目前已到达目的地" << endl;
+        reset_text_color();
+        sleep();
+        return;
+    }
     cur = start_index;
     while (true) {
         system("cls");
         printmap();
-        set_text_color(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY); // 白色，深蓝色背景
+        set_text_color(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
         print_recommend(start_index, end_index);
         cout << endl << endl;
         reset_text_color();
-        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY); // 白色，深蓝色背景
+        set_text_color(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
         print_intro(cur);
         print_total_step();
         cout << endl;
         printchoices(cur);
         reset_text_color();
-        if (!go()) {
+        if (!go(end_index)) {
             return;
         }
     }

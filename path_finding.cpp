@@ -1,43 +1,36 @@
+/**
+ * @file path_finding.cpp
+ * @brief 路径规划实现的源文件。
+ * 包含 Floyd 算法和路径恢复的具体实现。
+ */
+
 #include "path_finding.h"
 #include "mystack.h"
 #include <iostream>
 
-int shortest_path[MAX_ELEMENTNUM][MAX_ELEMENTNUM];  // 存储最短路径长度
-int prev[MAX_ELEMENTNUM][MAX_ELEMENTNUM];          // 存储前驱节点，用于恢复路径
+int shortest_path[MAX_ELEMENTNUM][MAX_ELEMENTNUM];
+int prev[MAX_ELEMENTNUM][MAX_ELEMENTNUM];
 
 void floyd()
 {
-    // 初始化最短路径矩阵为邻接矩阵的副本
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {
             shortest_path[i][j] = adjm[i][j];
-            prev[i][j] = (i == j) ? -1 : ((adjm[i][j] != INF) ? i : -1); // 直接相连时前驱为 i
+            prev[i][j] = (i == j) ? -1 : ((adjm[i][j] != INF) ? i : -1);
         }
     }
 
-    // 核心三重循环：尝试以k为中间节点更新i到j的最短路径
     for (int k = 1; k <= n; k++) {
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
                 if (shortest_path[i][k] != INF && shortest_path[k][j] != INF &&
                     (shortest_path[i][j] == INF || shortest_path[i][j] > shortest_path[i][k] + shortest_path[k][j])) {
                     shortest_path[i][j] = shortest_path[i][k] + shortest_path[k][j];
-                    prev[i][j] = k; // 更新前驱为中间节点 k
+                    prev[i][j] = k;
                 }
             }
         }
     }
-
-    //// 调试输出：打印 shortest_path 矩阵
-    //std::cout << "最短路径矩阵：" << std::endl;
-    //for (int i = 1; i <= n; i++) {
-    //    for (int j = 1; j <= n; j++) {
-    //        std::cout << shortest_path[i][j] << "\t";
-    //    }
-    //    std::cout << std::endl;
-    //}
-
-    //print_prev_array();
 }
 
 void print_prev_array()
@@ -56,7 +49,7 @@ void print_prev_array()
                 std::cout << "\t-";
             }
             else {
-                std::cout << "\t" << location[prev[i][j]]; // 输出前驱地点名
+                std::cout << "\t" << location[prev[i][j]];
             }
         }
         std::cout << std::endl;
@@ -80,7 +73,7 @@ void print_path_start_end(int start, int end)
     while (current != -1 && current != start) {
         pathStack.push(current);
         current = prev[start][current];
-        if (current == prev[start][current]) break; // 避免死循环
+        if (current == prev[start][current]) break;
     }
     if (current == start) pathStack.push(current);
 
@@ -95,7 +88,8 @@ void print_path_start_end(int start, int end)
     std::cout << "  (距离: " << shortest_path[start][end] << ")" << std::endl;
 }
 
-void print_all_paths_from(int start) {
+void print_all_paths_from(int start)
+{
     if (start < 1 || start > n) {
         std::cout << "无效的起点！" << std::endl;
         return;
@@ -103,24 +97,22 @@ void print_all_paths_from(int start) {
 
     std::cout << "从 " << location[start] << " 到各点的最短路径：" << std::endl;
     for (int end = 1; end <= n; end++) {
-        if (start == end) continue; // 跳过起点到自身的路径
+        if (start == end) continue;
 
         if (shortest_path[start][end] == INF) {
             std::cout << "到 " << location[end] << "：不可达" << std::endl;
             continue;
         }
 
-        // 使用栈回溯路径
         mystack<int> pathStack;
         int current = end;
         while (current != -1 && current != start) {
             pathStack.push(current);
             current = prev[start][current];
-            if (current == prev[start][current]) break; // 避免死循环
+            if (current == prev[start][current]) break;
         }
         if (current == start) pathStack.push(current);
 
-        // 输出路径和距离
         std::cout << "到 " << location[end] << "：";
         bool first = true;
         while (!pathStack.isempty()) {
@@ -140,22 +132,19 @@ void travel(int start)
         return;
     }
 
-    bool visited[MAX_ELEMENTNUM] = { false };  // 标记地点是否已访问
-    int path[MAX_ELEMENTNUM];                // 存储路径
-    int path_length = 0;                     // 路径长度
-    int current = start;                     // 当前位置
-    int total_distance = 0;                  // 总路程
+    bool visited[MAX_ELEMENTNUM] = { false };
+    int path[MAX_ELEMENTNUM];
+    int path_length = 0;
+    int current = start;
+    int total_distance = 0;
 
-    // 初始化路径，从起点开始
     path[path_length++] = current;
     visited[current] = true;
 
-    // 贪心策略：每次选择距离当前位置最近且未访问的地点
-    for (int i = 1; i < n; i++) {  // 需要访问n-1个其他地点
-        int next = -1;             // 下一个地点
-        int min_dist = INF;        // 最小距离
+    for (int i = 1; i < n; i++) {
+        int next = -1;
+        int min_dist = INF;
 
-        // 寻找距离当前位置最近且未访问的地点
         for (int j = 1; j <= n; j++) {
             if (!visited[j] && shortest_path[current][j] < min_dist) {
                 next = j;
@@ -168,14 +157,12 @@ void travel(int start)
             return;
         }
 
-        // 更新路径和状态
         path[path_length++] = next;
         visited[next] = true;
         total_distance += min_dist;
         current = next;
     }
 
-    // 回到起点
     if (shortest_path[current][start] != INF) {
         path[path_length++] = start;
         total_distance += shortest_path[current][start];
@@ -185,7 +172,6 @@ void travel(int start)
         return;
     }
 
-    // 输出旅行路径和总路程
     std::cout << "旅行路径：";
     for (int i = 0; i < path_length; i++) {
         std::cout << location[path[i]];

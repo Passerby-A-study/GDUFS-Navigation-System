@@ -1,6 +1,13 @@
+/**
+ * @file style.h
+ * @brief 样式和颜色设置的头文件。
+ * 包含 Windows 控制台颜色宏定义和相关函数。
+ */
+
 #pragma once
 #include <windows.h>
-// 宏定义：前景色
+
+ // 宏定义：前景色
 #define FOREGROUND_BLACK 0
 #define FOREGROUND_BLUE 1
 #define FOREGROUND_GREEN 2
@@ -31,7 +38,16 @@
 #define BACKGROUND_WHITE (BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE)
 #define BACKGROUND_DARK_BLUE (BACKGROUND_BLUE)
 #define BACKGROUND_INTENSITY 128 // 增强背景亮度
+
+/**
+ * @brief 设置控制台文本颜色。
+ *
+ * @param foreground 前景色代码。
+ * @param background 背景色代码，默认为 0（黑色）。
+ */
 void set_text_color(int foreground, int background = 0);
+
+/**
+ * @brief 重置控制台文本颜色为默认值。
+ */
 void reset_text_color();
-//set_text_color(FOREGROUND_GREEN);
-//reset_text_color();
