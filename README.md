@@ -1,5 +1,3 @@
-以下是基于您提供的代码生成的 `README.md` 文件内容。`README.md` 使用 Markdown 格式，提供了项目概述、安装说明、使用方法、文件结构和贡献指南等信息，旨在帮助用户快速了解和使用该项目。
-
 ---
 
 # Campus Navigation System
