@@ -21,7 +21,7 @@
 ## 安装与编译
 1. **克隆仓库**：
    ```bash
-   git clone https://github.com/yourusername/CampusNavigationSystem](https://github.com/Passerby-A-study/GDUFS-Navigation-System.git
+   git clone https://github.com/Passerby-A-study/GDUFS-Navigation-System.git
    cd CampusNavigationSystem
    ```
 
